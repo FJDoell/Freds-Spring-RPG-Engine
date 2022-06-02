@@ -1,0 +1,10 @@
+package com.model;
+
+public enum EffectType {
+	// GENERALLY BEFORE
+	RAW_DAMAGE, PERCENT_DAMAGE,
+	RAW_HEAL, PERCENT_HEAL,
+	REVIVE,
+	// GENERALLY AFTER
+	CHECK_HP;
+}
