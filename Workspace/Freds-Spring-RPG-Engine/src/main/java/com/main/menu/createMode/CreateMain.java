@@ -6,9 +6,9 @@ import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.character.CharacterRepo;
+import com.character.equipment.EquipmentRepo;
 import com.main.MainMenuService;
-import com.repository.CharacterRepo;
-import com.repository.EquipmentRepo;
 
 /**
  * Handles create mode for all sorts of repositories.
