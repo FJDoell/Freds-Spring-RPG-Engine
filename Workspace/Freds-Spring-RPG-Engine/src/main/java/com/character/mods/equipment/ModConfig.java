@@ -1,0 +1,15 @@
+package com.character.mods.equipment;
+
+public enum ModConfig {
+	MOD_ID("charEquipment");
+	
+	private String id;
+	
+	ModConfig(String id) {
+		this.id = id;
+	}
+	
+	public String getId() {
+		return id;
+	}
+}

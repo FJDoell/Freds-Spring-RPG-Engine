@@ -3,17 +3,17 @@ package com.effects;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 
 import com.effects.elements.Elements;
 
@@ -40,8 +40,9 @@ public class Effect {
 	private EffectType removeEffect;
 	
 	// ELEMENT MOD
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_element_id")
+	@ElementCollection(targetClass = Elements.class)
+	@JoinTable(name = "elements", joinColumns = @JoinColumn(name = "elementId"))
+	@Column(name = "elements", nullable = false)
 	@Enumerated(EnumType.ORDINAL)
 	Set<Elements> elements;
 

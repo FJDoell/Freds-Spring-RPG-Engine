@@ -1,5 +1,7 @@
 package com.stats;
 
+import org.springframework.stereotype.Service;
+
 import com.stats.flat.BaseStats;
 import com.stats.mult.MultStats;
 
@@ -8,6 +10,7 @@ import com.stats.mult.MultStats;
  * @author darkm
  *
  */
+@Service
 public class StatService {
 	
 	/**
