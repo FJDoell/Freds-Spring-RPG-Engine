@@ -1,5 +1,5 @@
 # Freds-Spring-RPG-Engine
-A console based RPG engine for Spring. Later 2.0 will be made to integrate with Angular.
+A console based RPG engine using Spring. Later 2.0 will be made to integrate with Angular.
 
 ## Features
 Currently, the core features are still a work in progress.
