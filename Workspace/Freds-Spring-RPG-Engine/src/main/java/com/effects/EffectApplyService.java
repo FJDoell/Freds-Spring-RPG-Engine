@@ -50,15 +50,15 @@ public class EffectApplyService {
 			damageServ.dealDamage(c, effectElements, (int)Math.round(c.getHp() - effectNum));
 			return c;
 		} else if(myEffectType.equals(EffectType.PERCENT_DAMAGE)) {
-			damageServ.dealDamage(c, effectElements, (int)Math.round(c.getHp() - c.getMaxHp() * effectNum));
+			damageServ.dealDamage(c, effectElements, (int)Math.round(c.getMaxHp() * effectNum));
 			return c;
 		} else if(myEffectType.equals(EffectType.CHECK_HP)) {
 			deathServ.checkDead(c);
 			return c;
 		} else if(myEffectType.equals(EffectType.RAW_HEAL)) {
-			healServ.healDamage(c, (int)Math.round(charServ.calcTotalWis(c) + effectNum));
+			healServ.healDamage(c, (int)Math.round(c.getTotalWis() + effectNum));
 		} else if(myEffectType.equals(EffectType.PERCENT_HEAL)) {
-			
+			healServ.healDamage(c, (int)Math.round(c.getMaxHp() * effectNum));
 		} else if(myEffectType.equals(EffectType.REVIVE)) {
 			
 		} else {

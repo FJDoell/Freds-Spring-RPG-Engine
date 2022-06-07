@@ -1,4 +1,4 @@
-package com.character.equipment;
+package com.character.mods.equipment;
 
 import java.util.Set;
 
@@ -15,12 +15,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.character.mods.CharacterMods;
 import com.effects.byTurn.ByTurnEffect;
 import com.effects.elements.ElementResistance;
 import com.stats.flat.BaseStats;
 import com.stats.mult.MultStats;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * A model for equipment.
@@ -29,6 +31,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@EqualsAndHashCode(callSuper=false)
 @Table(name="equipment")
 public class Equipment {
 	// Unique identifier for this equipment

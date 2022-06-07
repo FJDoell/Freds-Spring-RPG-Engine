@@ -6,6 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.character.CharacterModel;
 import com.exceptions.MissingTypeException;
 import com.global.GlobalSettingService;
 import com.global.ResistanceStacking;
@@ -128,4 +129,15 @@ public class ElementService {
 		return resist1;
 	}
 
+	/**
+	 * gets total resistances for given character.
+	 * @param c
+	 * @return
+	 * @throws MissingTypeException
+	 */
+	public HashSet<ElementResistance> getTotalResistances(CharacterModel c) throws MissingTypeException {
+		HashSet<ElementResistance> resistTotal = new HashSet<ElementResistance>();
+		resistTotal.addAll(addResistances(c.getBonusResistances(), c.getNatResistances()));
+		return resistTotal;
+	}
 }

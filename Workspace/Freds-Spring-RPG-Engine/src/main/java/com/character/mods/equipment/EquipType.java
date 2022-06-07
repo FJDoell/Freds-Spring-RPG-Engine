@@ -1,4 +1,4 @@
-package com.character.equipment;
+package com.character.mods.equipment;
 
 public enum EquipType {
 	WEAPON, ARMOR;

@@ -1,4 +1,4 @@
-package com.character.equipment;
+package com.character.mods.equipment;
 
 import java.util.Set;
 

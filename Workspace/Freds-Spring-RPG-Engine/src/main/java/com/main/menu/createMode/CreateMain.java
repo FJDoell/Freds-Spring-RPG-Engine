@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.character.CharacterRepo;
-import com.character.equipment.EquipmentRepo;
+import com.character.mods.equipment.EquipmentRepo;
 import com.main.MainMenuService;
 
 /**

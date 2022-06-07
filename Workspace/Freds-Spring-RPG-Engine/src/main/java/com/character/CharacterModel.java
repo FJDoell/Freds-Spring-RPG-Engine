@@ -1,5 +1,6 @@
 package com.character;
 
+import java.util.HashMap;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -14,10 +15,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.character.equipment.Equipment;
+import com.character.mods.CharacterMods;
 import com.effects.byTurn.ByTurnEffect;
 import com.effects.elements.ElementResistance;
 import com.effects.instant.InstantEffect;
+import com.stats.flat.BaseStatBuilder;
 import com.stats.flat.BaseStats;
 import com.stats.mult.MultStats;
 
@@ -66,15 +68,13 @@ public class CharacterModel {
 	@JoinColumn(name = "fk_multStat_id")
 	MultStats baseMultStats;
 
-	// Equipment MOD
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_equipSet_id")
-	Set<Equipment> equipment;
+	// Mods
+	HashMap<String, CharacterMods> mods;
 
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_resistance_id")
 	Set<ElementResistance> natResistances;
-	
+
 	@Transient
 	Set<ByTurnEffect> byTurnEffects;
 	@Transient
@@ -99,8 +99,8 @@ public class CharacterModel {
 	@Transient
 	int maxMp;
 
-	public CharacterModel(String name, int level, double expPerLevel, BaseStats baseStats,
-			MultStats multStats, Set<ElementResistance> resistances) {
+	public CharacterModel(String name, int level, double expPerLevel, BaseStats baseStats, MultStats multStats,
+			Set<ElementResistance> resistances) {
 		super();
 		this.name = name;
 		this.level = level;
@@ -110,6 +110,65 @@ public class CharacterModel {
 		this.maxHp = baseStats.getHp();
 		this.maxMp = baseStats.getMp();
 		this.natResistances = resistances;
+	}
+
+	////////////////////////////////
+	// Calculate the totals of STATS
+	////////////////////////////////
+	/**
+	 * Given a character, return a BaseStats object containing the totals of all
+	 * their bonuses added together.
+	 * 
+	 * @param this
+	 * @return
+	 */
+	public BaseStats getTotalStats() {
+		BaseStats totalStats = new BaseStatBuilder().withHp(getTotalHp()).withMp(getTotalMp())
+				.withAtk(getTotalAtk()).withDef(getTotalDef()).withBaseInt(getTotalIntelligence())
+				.withWis(getTotalWis()).withSpd(getTotalSpd()).build();
+		return totalStats;
+	}
+
+	public int getTotalHp() {
+		int baseTotal = this.getBaseStats().getHp() + this.getBonusStats().getHp();
+		double multTotal = this.getBaseMultStats().getHp() + this.getBonusMultStats().getHp();
+		return (int) (baseTotal * multTotal);
+	}
+
+	public int getTotalMp() {
+		int baseTotal = this.getBaseStats().getMp() + this.getBonusStats().getMp();
+		double multTotal = this.getBaseMultStats().getMp() + this.getBonusMultStats().getMp();
+		return (int) (baseTotal * multTotal);
+	}
+
+	public int getTotalAtk() {
+		int baseTotal = this.getBaseStats().getAtk() + this.getBonusStats().getAtk();
+		double multTotal = this.getBaseMultStats().getAtk() + this.getBonusMultStats().getAtk();
+		return (int) (baseTotal * multTotal);
+	}
+
+	public int getTotalDef() {
+		int baseTotal = this.getBaseStats().getDef() + this.getBonusStats().getDef();
+		double multTotal = this.getBaseMultStats().getDef() + this.getBonusMultStats().getDef();
+		return (int) (baseTotal * multTotal);
+	}
+
+	public int getTotalIntelligence() {
+		int baseTotal = this.getBaseStats().getBaseInt() + this.getBonusStats().getBaseInt();
+		double multTotal = this.getBaseMultStats().getBaseInt() + this.getBonusMultStats().getBaseInt();
+		return (int) (baseTotal * multTotal);
+	}
+
+	public int getTotalWis() {
+		int baseTotal = this.getBaseStats().getWis() + this.getBonusStats().getWis();
+		double multTotal = this.getBaseMultStats().getWis() + this.getBonusMultStats().getWis();
+		return (int) (baseTotal * multTotal);
+	}
+
+	public int getTotalSpd() {
+		int baseTotal = this.getBaseStats().getSpd() + this.getBonusStats().getSpd();
+		double multTotal = this.getBaseMultStats().getSpd() + this.getBonusMultStats().getSpd();
+		return (int) (baseTotal * multTotal);
 	}
 
 }

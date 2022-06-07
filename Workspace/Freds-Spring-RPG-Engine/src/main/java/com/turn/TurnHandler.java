@@ -54,7 +54,7 @@ public class TurnHandler {
 	 */
 	public ArrayList<Action> sortActionsBySpeed() {
 		for(Action a : allActions) {
-			a.setTotalSpd(charServ.calcTotalSpd(a.getActor()) + a.getBonusSpd());
+			a.setTotalSpd((a.getActor().getTotalSpd()) + a.getBonusSpd());
 		}
 		allActions.sort((a1, a2) -> a2.getTotalSpd() - a1.getTotalSpd());
 		return allActions;

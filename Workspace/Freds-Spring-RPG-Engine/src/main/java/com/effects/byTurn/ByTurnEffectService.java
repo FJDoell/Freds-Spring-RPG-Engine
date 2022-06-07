@@ -57,4 +57,10 @@ public class ByTurnEffectService {
 		}
 		return false;
 	}
+	
+	public CharacterModel tickTurns(CharacterModel c) throws MissingTypeException {
+		for (ByTurnEffect te : c.getByTurnEffects())
+			onApply(te, c);
+		return c;
+	}
 }

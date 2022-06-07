@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.character.CharacterModel;
-import com.character.CharacterService;
 import com.character.Restrictions;
 import com.effects.elements.ElementResistance;
+import com.effects.elements.ElementService;
 import com.effects.elements.Elements;
 import com.exceptions.MissingTypeException;
 import com.global.GlobalSettingService;
@@ -33,12 +33,12 @@ public class DamageService {
 	MessageService messageServ;
 	
 	@Autowired
-	CharacterService charServ;
+	ElementService elementServ;
 
 	public CharacterModel dealDamage(CharacterModel c, Set<Elements> elements, int damage) throws MissingTypeException {
 		if (!c.getRestrictions().contains(Restrictions.NO_DAMAGE)) {
 			// ELEMENT MOD
-			damage = calculateResistance(charServ.getTotalResistances(c), elements, damage);
+			damage = calculateResistance(elementServ.getTotalResistances(c), elements, damage);
 			
 			if(damage < globalSettings.getMINIMUM_DAMAGE())
 				damage = globalSettings.getMINIMUM_DAMAGE();
