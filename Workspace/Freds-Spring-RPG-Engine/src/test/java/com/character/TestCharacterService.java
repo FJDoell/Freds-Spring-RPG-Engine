@@ -1,4 +1,4 @@
-package com;
+package com.character;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

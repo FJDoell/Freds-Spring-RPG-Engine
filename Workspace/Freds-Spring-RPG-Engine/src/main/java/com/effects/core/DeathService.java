@@ -24,7 +24,7 @@ public class DeathService {
 				c.getRestrictions().add(Restrictions.CANNOT_MOVE);
 				c.getRestrictions().add(Restrictions.CANNOT_BE_ATTACKED);
 				c.getRestrictions().add(Restrictions.CANNOT_BE_HEALED);
-				c.getRestrictions().add(Restrictions.CAN_BE_REVIVED);
+				c.getRestrictions().remove(Restrictions.CANNOT_BE_REVIVED);
 				messageServ.deathMessage(c.getName());
 			} else {
 				// they can't die; HP is 1.

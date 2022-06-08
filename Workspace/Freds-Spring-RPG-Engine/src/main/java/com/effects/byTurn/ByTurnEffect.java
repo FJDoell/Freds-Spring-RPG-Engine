@@ -2,6 +2,8 @@ package com.effects.byTurn;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Transient;
 
 import com.effects.Effect;
@@ -20,8 +22,14 @@ public class ByTurnEffect extends Effect {
 	@Column(name="max_stacks")
 	private int maxStacks = 1;
 	
+	@Enumerated(EnumType.ORDINAL)
+	StackHandling stackHandleType;
+	
 	@Transient
 	private int turnCounter = 0;
+	
+	@Transient
+	private int executeCount = 0;
 	
 	@Transient
 	private int stacks = 0;

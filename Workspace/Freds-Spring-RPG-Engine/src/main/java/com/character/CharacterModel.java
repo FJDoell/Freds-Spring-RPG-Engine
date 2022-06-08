@@ -78,8 +78,6 @@ public class CharacterModel {
 	@Transient
 	Set<ByTurnEffect> byTurnEffects;
 	@Transient
-	Set<InstantEffect> instantEffects;
-	@Transient
 	Set<Restrictions> restrictions;
 	// Bonus stats
 	@Transient

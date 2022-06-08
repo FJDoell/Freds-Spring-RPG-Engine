@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.action.Action;
 import com.action.ActionService;
-import com.character.CharacterService;
+import com.exceptions.MissingTypeException;
 import com.messaging.MessageService;
 
 /**
@@ -20,9 +20,6 @@ public class TurnHandler {
 	
 	@Autowired
 	ActionService actionServ;
-	
-	@Autowired
-	CharacterService charServ;
 	
 	@Autowired
 	MessageService messageServ;
@@ -41,11 +38,13 @@ public class TurnHandler {
 	
 	/**
 	 * Standard turn execution. Handles sorting by SPD, executing, and clearing the action queue.
+	 * @throws MissingTypeException 
 	 */
-	public void executeTurn() {
+	public boolean executeTurn() throws MissingTypeException {
 		sortActionsBySpeed();
 		executeActions();
 		clearActions();
+		return true;
 	}
 	
 	/**
@@ -63,8 +62,9 @@ public class TurnHandler {
 	/**
 	 * Execute the actions list.
 	 * @return
+	 * @throws MissingTypeException 
 	 */
-	public ArrayList<Action> executeActions() {
+	public ArrayList<Action> executeActions() throws MissingTypeException {
 		for(Action a : allActions)
 			actionServ.execute(a);
 		return allActions;

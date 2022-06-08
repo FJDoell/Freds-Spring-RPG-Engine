@@ -60,10 +60,10 @@ public class EffectApplyService {
 		} else if(myEffectType.equals(EffectType.PERCENT_HEAL)) {
 			healServ.healDamage(c, (int)Math.round(c.getMaxHp() * effectNum));
 		} else if(myEffectType.equals(EffectType.REVIVE)) {
-			
+			reviveServ.revive(c);
 		} else {
 			throw new MissingTypeException("INVALID EFFECT TYPE " + myEffectType + ","
-					+ "please define it in com.model.EffectType.java and handle it in EffectApplyService.");
+					+ "please define it in com.effects.EffectType and handle it in EffectApplyService.");
 		}
 		return c;
 	}
