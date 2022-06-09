@@ -16,6 +16,8 @@ import lombok.Data;
 public class GlobalSettingService {
 	final int MINIMUM_DAMAGE = 1;
 	final int MAX_DAMAGE = 9999;
+	final String GOLD_NAME = "Gold";
+	final int MAX_GOLD = 2_000_000_000;
 	final ResistanceStacking RESIST_STACK_STYLE = ResistanceStacking.STACK_MULTIPLY;
 	final ResistanceStacking RESIST_STACK_DAMAGE = ResistanceStacking.STACK_ADD;
 	final DamageFormulaOrder DAMAGE_FORMULA_ORDER = DamageFormulaOrder.ADD_FIRST;
