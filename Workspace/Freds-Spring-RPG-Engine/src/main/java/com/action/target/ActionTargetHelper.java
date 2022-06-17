@@ -43,13 +43,34 @@ public class ActionTargetHelper {
 		return null;
 	}
 	
+	/**
+	 * Get the given characters' allies from the given group.
+	 * @param c
+	 * @param possibleTargets
+	 * @return
+	 */
 	public List<CharacterModel> getAllies(CharacterModel c, List<CharacterModel> possibleTargets) {
 		if(charServ.isActor(c)) {
 			// actor
-			
+			return charServ.getActors(possibleTargets);
 		}
 		// monster
-		return possibleTargets;
+		return charServ.getMonsters(possibleTargets);
+	}
+	
+	/**
+	 * Get the given characters' enemies from the given group.
+	 * @param c
+	 * @param possibleTargets
+	 * @return
+	 */
+	public List<CharacterModel> getEnemies(CharacterModel c, List<CharacterModel> possibleTargets) {
+		if(charServ.isActor(c)) {
+			// actor
+			return charServ.getMonsters(possibleTargets);
+		}
+		// monster
+		return charServ.getActors(possibleTargets);
 	}
 	
 	

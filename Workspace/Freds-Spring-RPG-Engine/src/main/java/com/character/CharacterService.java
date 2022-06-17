@@ -1,5 +1,8 @@
 package com.character;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.character.actor.Actor;
@@ -27,6 +30,32 @@ public class CharacterService {
 		}
 		System.out.println("This is a monster");
 		return false;
+	}
+	
+	/**
+	 * Get all actors from a given character list.
+	 * @param charList
+	 * @return
+	 */
+	public List<CharacterModel> getActors(List<CharacterModel> charList) {
+		List<CharacterModel> returned = new ArrayList<CharacterModel>();
+		for(CharacterModel c : charList)
+			if(isActor(c))
+				returned.add(c);
+		return returned;
+	}
+	
+	/**
+	 * Get all non-actors from a given list of characters.
+	 * @param charList
+	 * @return
+	 */
+	public List<CharacterModel> getMonsters(List<CharacterModel> charList) {
+		List<CharacterModel> returned = new ArrayList<CharacterModel>();
+		for(CharacterModel c : charList)
+			if(!isActor(c))
+				returned.add(c);
+		return returned;
 	}
 
 }
