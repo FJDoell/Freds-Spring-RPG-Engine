@@ -15,7 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.character.mods.CharacterMods;
 import com.effects.byTurn.ByTurnEffect;
 import com.effects.elements.ElementResistance;
 import com.stats.flat.BaseStats;
