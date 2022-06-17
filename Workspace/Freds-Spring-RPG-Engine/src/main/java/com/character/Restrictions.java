@@ -11,6 +11,8 @@ package com.character;
  *
  */
 public enum Restrictions {
+	// SPECIAL
+	DEAD,
 	// ACTION RELATED
 	CANNOT_MOVE,
 	CANNOT_ATTACK,

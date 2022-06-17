@@ -35,13 +35,19 @@ public class ScopeModel {
 	// Who can be selected by this skill?
 	@Enumerated(EnumType.ORDINAL)
 	SkillTargetGroup targetGroup;
+	
+	// Whitelist (ONLY works on targets with below restrictions)
+	// vs Blacklist (Exclude targets with below restrictions)
+	@Column(name = "skill_restrictions", nullable = false)
+	@Enumerated(EnumType.ORDINAL)
+	RestrictionStyle restrictStyle;
 
 	// What restrictions make this target invalid? (Or make this action fail?)
 	@ElementCollection(targetClass = Restrictions.class)
 	@JoinTable(name = "skill_restrictions", joinColumns = @JoinColumn(name = "restrict_id"))
 	@Column(name = "skill_restrictions", nullable = false)
 	@Enumerated(EnumType.ORDINAL)
-	Set<Restrictions> invalidTargetRestrictions;
+	Set<Restrictions> targetRestrictions;
 
 	// Who among this group is targeted?
 	@Enumerated(EnumType.ORDINAL)

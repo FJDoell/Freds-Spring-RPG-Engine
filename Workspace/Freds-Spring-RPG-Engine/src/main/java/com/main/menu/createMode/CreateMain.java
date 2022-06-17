@@ -3,7 +3,6 @@ package com.main.menu.createMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.character.CharacterRepo;
 import com.character.mods.equipment.EquipmentRepo;
 import com.main.menu.CoreMenu;
 import com.main.menu.MenuService;
@@ -19,9 +18,6 @@ public class CreateMain extends CoreMenu {
 
 	@Autowired
 	EquipmentRepo equipRepo;
-
-	@Autowired
-	CharacterRepo charRepo;
 
 	@Autowired
 	MenuService menuServ;

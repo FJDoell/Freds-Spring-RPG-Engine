@@ -14,9 +14,6 @@ import com.character.mods.equipment.Equipment;
  */
 @Service
 public class CharacterService {
-
-	@Autowired
-	CharacterRepo repo;
 	
 	@Autowired
 	EquipService equipServ;

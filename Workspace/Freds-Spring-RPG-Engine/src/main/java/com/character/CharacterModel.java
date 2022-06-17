@@ -4,21 +4,23 @@ import java.util.HashMap;
 import java.util.Set;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.action.skill.SkillModel;
 import com.character.mods.CharacterMods;
 import com.effects.byTurn.ByTurnEffect;
 import com.effects.elements.ElementResistance;
-import com.effects.instant.InstantEffect;
 import com.stats.flat.BaseStatBuilder;
 import com.stats.flat.BaseStats;
 import com.stats.mult.MultStats;
@@ -29,12 +31,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
-@Entity
-@Table(name = "characters")
+
 /**
  * Contains the minimal data needed for a battler. Used as the basis for enemies
  * and allies alike.
@@ -42,6 +39,13 @@ import lombok.experimental.FieldDefaults;
  * @author darkm
  *
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Table(name = "characters")
+@MappedSuperclass
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class CharacterModel {
 	// Unique identifier for this character
 	@Id
@@ -74,6 +78,10 @@ public class CharacterModel {
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_resistance_id")
 	Set<ElementResistance> natResistances;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_skill_id")
+	Set<SkillModel> learnedSkills;
 
 	@Transient
 	Set<ByTurnEffect> byTurnEffects;

@@ -9,5 +9,5 @@ package com.action.skill;
  *
  */
 public enum SkillModifier {
-	NONE, TARGET, EXCEPT_TARGET;
+	NONE, TARGET, EXCEPT_TARGET, RANDOM;
 }

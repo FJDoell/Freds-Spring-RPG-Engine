@@ -3,7 +3,6 @@ package com.action;
 import java.util.Set;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,14 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import com.action.scope.ScopeModel;
 import com.character.CharacterModel;
-import com.character.Restrictions;
 import com.effects.byTurn.ByTurnEffect;
 import com.effects.instant.InstantEffect;
 
@@ -65,13 +62,6 @@ public class Action {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_scope_id")
 	ScopeModel actionScope;
-
-	// What restrictions make this skill fail to hit the target?
-	@ElementCollection(targetClass = Restrictions.class)
-	@JoinTable(name = "action_restrictions", joinColumns = @JoinColumn(name = "restrict_id"))
-	@Column(name = "action_restrictions", nullable = false)
-	@Enumerated(EnumType.ORDINAL)
-	Set<Restrictions> invalidTargetRestrictions;
 
 	@Transient
 	CharacterModel actor;

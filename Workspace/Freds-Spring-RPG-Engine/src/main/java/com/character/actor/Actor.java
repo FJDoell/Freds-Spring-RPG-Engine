@@ -11,14 +11,17 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.character.CharacterModel;
+import com.effects.byTurn.ByTurnEffect;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -29,11 +32,7 @@ import lombok.experimental.FieldDefaults;
  * @author darkm
  *
  */
-public class Actor {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long id;
-	
+public class Actor extends CharacterModel {
 	// What total EXP do they have?
 	@Column(name="actor_total_exp", nullable = false)
 	double totalExp = 1.0;
@@ -42,7 +41,4 @@ public class Actor {
 	@Column(name="actor_exp_rate", nullable = false)
 	double expRate = 1.0;
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_character_id")
-	CharacterModel characterBase;
 }
