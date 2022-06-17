@@ -1,9 +1,9 @@
-package com.character.mods.equipment;
+package com.party;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EquipmentRepo extends JpaRepository<Equipment, Long> {
+public interface PartyRepo extends JpaRepository<Party, Integer> {
 
 }

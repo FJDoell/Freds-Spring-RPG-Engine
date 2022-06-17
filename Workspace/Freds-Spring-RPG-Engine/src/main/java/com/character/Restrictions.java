@@ -1,7 +1,6 @@
 package com.character;
 
 /**
- * Despite the negative name, restrictions can be positive.
  * Essentially, these are used to "cancel out" effects.
  * 
  * They're like a bunch of flags that a character can contain,

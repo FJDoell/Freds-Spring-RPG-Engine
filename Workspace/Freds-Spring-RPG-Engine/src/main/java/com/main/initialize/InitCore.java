@@ -1,5 +1,6 @@
 package com.main.initialize;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.main.menu.createMode.CreateMain;
@@ -12,8 +13,11 @@ import com.main.menu.createMode.CreateMain;
 @Service
 public class InitCore {
 	
-	public static void initialize() {
-		CreateMain.mainMenu();
+	@Autowired
+	CreateMain createMainMenu;
+	
+	public void initialize() {
+		createMainMenu.mainMenu();
 	}
 
 }

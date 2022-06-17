@@ -1,14 +1,12 @@
 package com.main.menu.createMode;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.character.CharacterRepo;
 import com.character.mods.equipment.EquipmentRepo;
-import com.main.MainMenuService;
+import com.main.menu.CoreMenu;
+import com.main.menu.MenuService;
 
 /**
  * Handles create mode for all sorts of repositories.
@@ -17,36 +15,32 @@ import com.main.MainMenuService;
  *
  */
 @Service
-public class CreateMain {
-	
+public class CreateMain extends CoreMenu {
+
 	@Autowired
 	EquipmentRepo equipRepo;
-	
+
 	@Autowired
 	CharacterRepo charRepo;
 
-	static Scanner input = new Scanner(System.in);
-	static String menuName = "CREATE: MAIN MENU";
-	static String menuDescription = "Welcome! Go to create something special below.";
-	static String selected = "MAIN";
-	static ArrayList<String> options = new ArrayList<String>();
-	static ArrayList<String> opDescs = new ArrayList<String>();
+	@Autowired
+	MenuService menuServ;
 
 	// MAIN MENU
-	public static void mainMenu() {
-		options.clear();
-		opDescs.clear();
-		menuName = "CREATE: MAIN MENU";
-		menuDescription = "Welcome! Go to create something special below.";
+	public void mainMenu() {
+		initMenu("CREATE: MAIN MENU", "Welcome! Go to create something special below.");
 
-		options.add("EquipType");
-		opDescs.add("Create new equipment TYPE");
+		options.add("Characters");
+		opDescs.add("Create characters (monsters OR actors)");
+
 		options.add("Equipment");
 		opDescs.add("Create new equipment");
+
 		options.add("Character");
 		opDescs.add("Create a new character");
 
-		selected = MainMenuService.printMenu(input, menuName, menuDescription, options, opDescs);
+		selected = menuServ.generateChoices(menuName, menuDescription, options, opDescs);
+		
 		if (selected.equals("EQUIPMENT")) {
 
 		} else if (selected.equals("CHARACTER")) {
@@ -57,6 +51,6 @@ public class CreateMain {
 	}
 
 	public void createEquipment() {
-		
+
 	}
 }

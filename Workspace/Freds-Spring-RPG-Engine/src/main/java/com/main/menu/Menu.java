@@ -1,21 +1,48 @@
-package com.main;
+package com.main.menu;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 
-import org.springframework.stereotype.Service;
+import lombok.Data;
 
 /**
- * Handles input from the user.
+ * A class that can generate menus and handle input like magic!
  * 
  * @author darkm
  *
  */
-@Service
-public class MainMenuService {
+@Data
+public class Menu {
+	
+	private Scanner input = new Scanner(System.in);
+	private String menuName = "";
+	private String menuDescription = "";
+	private InputType inputType;
+	private ArrayList<String> options = new ArrayList<String>();
+	private ArrayList<String> opDescs = new ArrayList<String>();
+	
+	private String returnedStringInput;
+	private String returnedChoice;
+	private String desiredInput;
+	private int returnedIntInput;
+	
+	public Menu(String desiredInput) {
+		super();
+		this.desiredInput = desiredInput;
+	}
+	
+	public Menu(String menuName, String menuDescription, Set<String> options, Set<String> opDescs) {
+		super();
+		this.menuName = menuName;
+		this.menuDescription = menuDescription;
+		this.options = new ArrayList<String>(options);
+		this.opDescs = new ArrayList<String>(opDescs);
+		printMenuChoices();
+	}
+	
 	// print menu
-	public static String printMenu(Scanner input, String menuName, String menuDescription, ArrayList<String> options,
-			ArrayList<String> opDescs) {
+	public String printMenuChoices() {
 		// Exit out completely if the arrays are not of equal length
 		if (options.size() != opDescs.size()) {
 			System.out.println("OI! These option descriptions don't match with the number of options!");
@@ -32,14 +59,14 @@ public class MainMenuService {
 		System.out.println(menuDescription);
 		System.out.println(">>>>> You have the following options <<<<<");
 
-		String selected = selectFromChoices(input, options, opDescs);
+		this.returnedChoice = selectFromChoices(input, options, opDescs);
 
-		return selected;
+		return returnedChoice;
 	} // end printMenu
 
 	// select from choices
 
-	public static String selectFromChoices(Scanner input, ArrayList<String> options, ArrayList<String> opDescs) {
+	public String selectFromChoices(Scanner input, ArrayList<String> options, ArrayList<String> opDescs) {
 		// Print options and descriptions
 		for (int i = 0; i < options.size(); i++) {
 			System.out.println(Integer.toString(i) + "/" + options.get(i) + " - " + opDescs.get(i) + ".");
@@ -78,7 +105,7 @@ public class MainMenuService {
 	}
 
 	// request input string
-	public static String requestInputString(Scanner input, String desiredInput) {
+	public String requestInputString(String desiredInput) {
 		System.out.println(">>>>> " + desiredInput + " <<<<<");
 		// request input
 		String strInput = "";
@@ -92,7 +119,7 @@ public class MainMenuService {
 	} // end request string input
 
 	// request any int
-	public static int requestInputInt(Scanner input, String desiredInput) {
+	public int requestInputInt(String desiredInput) {
 		System.out.println(">>>>> " + desiredInput + " <<<<<");
 		int intInput = -1;
 		// try to get an int first
@@ -110,7 +137,7 @@ public class MainMenuService {
 	} // end request int input
 
 	// request positive int
-	public static int requestInputPositiveInt(Scanner input, String desiredInput) {
+	public int requestInputPositiveInt(String desiredInput) {
 		System.out.println(">>>>> " + desiredInput + " <<<<<");
 		int intInput = -1;
 		// try to get an int first
@@ -126,9 +153,21 @@ public class MainMenuService {
 		}
 		return intInput;
 	} // end request int input
+	
+	// invalid input type
+	public void invalidInputType() {
+		// Exit out completely if the arrays are not of equal length
+		System.out.println("OI! This input type doesn't exist!");
+		System.out.println("input type I was passed: " + inputType.toString());
+		System.out.println("Valid input types:");
+		for(InputType inType : InputType.values())
+			System.out.println(inType.toString());
+		System.out.println("I'm outta here.");
+		System.exit(0);
+	}
 
 	// error messages
-	private static void errorMessage(int annoyance) {
+	private void errorMessage(int annoyance) {
 		switch (annoyance) {
 		case 1:
 			System.out.println("Sorry, I didn't understand that. Try again.");
@@ -166,33 +205,5 @@ public class MainMenuService {
 		}
 	}
 
-	// Menus are organized from least nested to most
-	///////// FIRST LAYER: MAIN MENU
 	
-	
-	
-//	// Create Restaurant
-//	public static Restaurant createRestaurant(Scanner scan, Connection conn, RestaurantDao allRestaurants,
-//			Restaurant currentRestaurant, ChangeableString selected) {
-//		String userInputStr = MainMenuService.requestInputString(scan, "Please enter your desired username below");
-//		String userInputStr2 = MainMenuService.requestInputString(scan, "Please enter your desired password below");
-//		// Check if the name is taken, getting by X returns empty-valued object if none
-//		// is found
-//		if (allRestaurants.getByName(userInputStr).getUserName().equals("")) {
-//			currentRestaurant.setUserName(userInputStr);
-//			currentRestaurant.setPassword(userInputStr2);
-//			DaoToDb.addRestaurant(conn, allRestaurants, currentRestaurant);
-//			System.out.println("Restaurant Account created!");
-//			System.out.println("Username: " + userInputStr);
-//			System.out.println("Password: " + userInputStr2);
-//			selected.changeTo("MAIN");
-//			return currentRestaurant;
-//		} else {
-//			// username is taken!
-//			System.out.println("Sorry, that account username is already taken. Please try again.");
-//			selected.changeTo("MAIN");
-//			return currentRestaurant;
-//		}
-//	}
-
 } // end class
