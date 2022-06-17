@@ -22,6 +22,7 @@ public class DeathService {
 		if (c.getHp() <= 0) {
 			if(!c.getRestrictions().contains(Restrictions.CANNOT_DIE)) {
 				c.getRestrictions().clear();
+				c.getRestrictions().add(Restrictions.DEAD);
 				c.getRestrictions().add(Restrictions.CANNOT_MOVE);
 				c.getRestrictions().add(Restrictions.CANNOT_BE_ATTACKED);
 				c.getRestrictions().add(Restrictions.CANNOT_BE_HEALED);

@@ -2,16 +2,19 @@ package com.action.target;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.action.Action;
 import com.action.scope.ScopeModel;
 import com.character.CharacterModel;
-import com.character.actor.Actor;
-import com.character.monster.Monster;
+import com.character.CharacterService;
 
 @Service
 public class ActionTargetHelper {
+	
+	@Autowired
+	CharacterService charServ;
 
 	/**
 	 * This expects all current battlers to be passed as an argument.
@@ -41,11 +44,11 @@ public class ActionTargetHelper {
 	}
 	
 	public List<CharacterModel> getAllies(CharacterModel c, List<CharacterModel> possibleTargets) {
-		if(Actor.class.isAssignableFrom(c.getClass())) {
-			System.out.println("This is an actor");
-		} else if(Monster.class.isAssignableFrom(c.getClass())) {
-			System.out.println("This is a monster");
+		if(charServ.isActor(c)) {
+			// actor
+			
 		}
+		// monster
 		return possibleTargets;
 	}
 	

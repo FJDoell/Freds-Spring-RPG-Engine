@@ -15,6 +15,7 @@ public class ReviveService {
 
 	public CharacterModel revive(CharacterModel c) {
 		if(!c.getRestrictions().contains(Restrictions.CANNOT_BE_REVIVED) && c.getHp() <= 0) {
+			c.getRestrictions().remove(Restrictions.DEAD);
 			c.getRestrictions().remove(Restrictions.CANNOT_MOVE);
 			c.getRestrictions().remove(Restrictions.CANNOT_BE_ATTACKED);
 			c.getRestrictions().remove(Restrictions.CANNOT_BE_HEALED);

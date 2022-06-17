@@ -1,11 +1,8 @@
 package com.character;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.character.actor.Actor;
-import com.character.mods.equipment.EquipService;
-import com.character.mods.equipment.Equipment;
 
 /**
  * Handles stuff to do with characters specifically
@@ -15,9 +12,6 @@ import com.character.mods.equipment.Equipment;
  */
 @Service
 public class CharacterService {
-
-	@Autowired
-	EquipService equipServ;
 
 	/**
 	 * Check if this Character is an Actor or a Monster.
@@ -33,18 +27,6 @@ public class CharacterService {
 		}
 		System.out.println("This is a monster");
 		return false;
-	}
-
-	// Add equipment
-	public CharacterModel addEquip(CharacterModel c, Equipment equip) {
-		equipServ.addEquip(c, equip);
-		return c;
-	}
-
-	// Remove equipment
-	public CharacterModel removeEquip(CharacterModel c, Equipment equip) {
-		equipServ.removeEquip(c, equip);
-		return c;
 	}
 
 }
