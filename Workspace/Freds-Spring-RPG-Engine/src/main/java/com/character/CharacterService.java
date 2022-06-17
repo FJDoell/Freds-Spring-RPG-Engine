@@ -15,36 +15,36 @@ import com.character.mods.equipment.Equipment;
  */
 @Service
 public class CharacterService {
-	
+
 	@Autowired
 	EquipService equipServ;
-	
+
 	/**
-	 * Get the type of this character: Actor, or Monster?<br>
-	 * True - Actor.<br>
-	 * False - Monster.
+	 * Check if this Character is an Actor or a Monster.
+	 * 
 	 * @param c
-	 * @return
+	 * @return True - Actor.<br>
+	 *         False - Monster.
 	 */
-	public boolean getType(CharacterModel c) {
-		if(Actor.class.isAssignableFrom(c.getClass())) {
+	public boolean isActor(CharacterModel c) {
+		if (Actor.class.isAssignableFrom(c.getClass())) {
 			System.out.println("This is an actor");
 			return true;
 		}
 		System.out.println("This is a monster");
 		return false;
 	}
-	
+
 	// Add equipment
 	public CharacterModel addEquip(CharacterModel c, Equipment equip) {
 		equipServ.addEquip(c, equip);
 		return c;
 	}
-	
+
 	// Remove equipment
 	public CharacterModel removeEquip(CharacterModel c, Equipment equip) {
 		equipServ.removeEquip(c, equip);
 		return c;
 	}
-	
+
 }
