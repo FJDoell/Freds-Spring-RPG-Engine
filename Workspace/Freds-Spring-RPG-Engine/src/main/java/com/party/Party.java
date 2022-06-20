@@ -1,6 +1,7 @@
 package com.party;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,10 +24,22 @@ public class Party {
 	
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_actor_active_id")
-	Set<Actor> active;
+	List<Actor> active;
 	
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_actor_reserve_id")
-	Set<Actor> reserve;
+	List<Actor> reserve;
+	
+	public Party() {
+		this.id = 0;
+		this.active = new ArrayList<Actor>();
+		this.reserve = new ArrayList<Actor>();
+	}
+
+	public Party(List<Actor> active, List<Actor> reserve) {
+		super();
+		this.active = active;
+		this.reserve = reserve;
+	}
 	
 }

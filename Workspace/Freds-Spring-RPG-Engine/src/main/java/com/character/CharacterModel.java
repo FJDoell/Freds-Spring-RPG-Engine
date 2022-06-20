@@ -117,6 +117,22 @@ public class CharacterModel {
 		this.maxMp = baseStats.getMp();
 		this.natResistances = resistances;
 	}
+	
+	public CharacterModel(String name, int level, double expPerLevel, BaseStats baseStats, MultStats baseMultStats,
+			Set<ElementResistance> natResistances, Set<SkillModel> learnedSkills, int hp, int mp) {
+		super();
+		this.name = name;
+		this.level = level;
+		this.expPerLevel = expPerLevel;
+		this.baseStats = baseStats;
+		this.baseMultStats = baseMultStats;
+		this.natResistances = natResistances;
+		this.learnedSkills = learnedSkills;
+		this.hp = hp;
+		this.maxHp = hp;
+		this.mp = mp;
+		this.maxMp = mp;
+	}
 
 	////////////////////////////////
 	// Calculate the totals of STATS
